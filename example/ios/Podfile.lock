@@ -1,0 +1,45 @@
+PODS:
+  - Ads-CN (4.1.0.2):
+    - Ads-CN/BUAdSDK (= 4.1.0.2)
+  - Ads-CN/BUAdSDK (4.1.0.2):
+    - Ads-CN/BUFoundation
+    - Ads-CN/Domestic
+  - Ads-CN/BUFoundation (4.1.0.2)
+  - Ads-CN/Domestic (4.1.0.2)
+  - Flutter (1.0.0)
+  - flutter_together_ad (0.0.1):
+    - Flutter
+    - TogetherAd (~> 0.1.2)
+  - GDTMobSDK (4.13.32):
+    - GDTMobSDK/GDTMobSDK (= 4.13.32)
+  - GDTMobSDK/GDTMobSDK (4.13.32)
+  - TogetherAd (0.1.2):
+    - Ads-CN
+    - GDTMobSDK
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_together_ad (from `.symlinks/plugins/flutter_together_ad/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Ads-CN
+    - GDTMobSDK
+    - TogetherAd
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_together_ad:
+    :path: ".symlinks/plugins/flutter_together_ad/ios"
+
+SPEC CHECKSUMS:
+  Ads-CN: 0efc9cab8b218b19b3a1f0edf2b6dffa9e28362b
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_together_ad: 937e80cd3ca1173fdc66a6e765eaa0be0af25067
+  GDTMobSDK: 9d764ad82c14196940833618c505b39c53351f8d
+  TogetherAd: 78f27aceee55d01c70fb53a375956b0449c084f8
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.11.2
