@@ -2,12 +2,20 @@ import Flutter
 import UIKit
 import TogetherAd
 
+func topViewController() -> UIViewController {
+        return UIApplication.shared.windows.filter { (w) -> Bool in
+            w.isHidden == false
+        }.first!.rootViewController!
+    }
+
 public class SwiftFlutterTogetherAdPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "com.xujiaji.togetherad/main", binaryMessenger: registrar.messenger())
         let instance = SwiftFlutterTogetherAdPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
         
+        // 注册全屏视频
+        TogetherAdFullscreen.register(with: registrar)
         
         let factory = TogetherAdSplashViewFactory(messenger: registrar.messenger())
         registrar.register(factory, withId: TogetherAdSplashViewFactory.viewType)

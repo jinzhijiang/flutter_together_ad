@@ -20,10 +20,42 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // String _platformVersion = 'Unknown';
+  TogetherAdFullscreen? fullscreen;
 
   @override
   void initState() {
     super.initState();
+    fullscreen = TogetherAdFullscreen(
+        alias: 'fullscreen',
+        callback: TogetherFullscreenCallback(
+            onAdFailedAll: (type) {
+              print("onAdFailedAll 全部加载失败 $type");
+            },
+            onAdFailed: (type, failedMsg) {
+              print("onAdFailed 加载失败 $type, $failedMsg");
+            },
+            onAdClicked: (type) {
+              print('onAdClicked 被点击 $type');
+            },
+            onAdLoaded: (type) {
+              print("onAdClicked 已加载 $type");
+            },
+            onAdDismissed: (type) {
+              print("onAdDismissed 已关闭 $type");
+            },
+            onAdVideoCached: (type) {
+              print("onAdVideoCached 已显示 $type");
+            },
+            onAdVideoComplete: (type) {
+              print("onAdVideoComplete 已显示 $type");
+            },
+            onAdShowed: (type) {
+              print("onAdShowed 已显示 $type");
+            },
+            onAdStartRequest: (type) {
+              print("onAdStartRequest 开始请求 $type");
+            }
+        ));
     // initPlatformState();
   }
 
@@ -58,9 +90,14 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: Column(
-            children: const [
+            children: [
               // Text('Running on: $_platformVersion\n'),
-              Text('xxx')
+              TextButton(
+                child: const Text("加载并显示全屏视频"),
+                onPressed: () {
+                  fullscreen?.loadAndShow();
+                },
+              ),
             ],
           ),
         ),

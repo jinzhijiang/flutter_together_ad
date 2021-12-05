@@ -16,7 +16,8 @@ class _SplashPageState extends State<SplashPage> {
   
   @override
   void initState() {
-    FlutterTogetherAd.csjInit(appId: "5195862", type: 'csj', isDebug: true);
+    FlutterTogetherAd.isDebug = true;
+    FlutterTogetherAd.csjInit(appId: "5195862", type: 'csj');
     FlutterTogetherAd.csjIdMap({
       "splash": "887525763",
       "banner": "946453843",
@@ -33,9 +34,12 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: TogetherAdSplashView(
         alias: 'splash',
-        callBack: TogetherSplashCallBack(
+        callback: TogetherSplashCallBack(
             onAdFailedAll: (type) {
               print("onAdFailedAll 全部加载失败 $type");
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => const MyApp()
+              ));
             },
             onAdFailed: (type, failedMsg) {
               print("onAdFailed 加载失败 $type, $failedMsg");

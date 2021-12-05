@@ -3,15 +3,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'together_method_callback.dart';
+import 'together_ad_method_callback.dart';
 
 class TogetherAdSplashView extends StatefulWidget {
   static const String viewType = 'com.xujiaji.togetherad/splashview';
 
-  final TogetherSplashCallBack? callBack;
+  final TogetherSplashCallBack? callback;
   final String alias;
 
-  const TogetherAdSplashView({Key? key, required this.alias, this.callBack}) : super(key: key);
+  const TogetherAdSplashView({Key? key, required this.alias, this.callback}) : super(key: key);
 
   @override
   State<TogetherAdSplashView> createState() => _TogetherAdSplashViewState();
@@ -76,25 +76,25 @@ class _TogetherAdSplashViewState extends State<TogetherAdSplashView> {
     final args = call.arguments;
     switch(call.method) {
       case "onAdStartRequest":
-        widget.callBack?.onAdStartRequest!(args['providerType']);
+        widget.callback?.onAdStartRequest!(args['providerType']);
         break;
       case "onAdFailedAll":
-        widget.callBack?.onAdFailedAll!(args['failedMsg']);
+        widget.callback?.onAdFailedAll!(args['failedMsg']);
         break;
       case "onAdFailed":
-        widget.callBack?.onAdFailed!(args['providerType'], args['failedMsg']);
+        widget.callback?.onAdFailed!(args['providerType'], args['failedMsg']);
         break;
       case "onAdLoaded":
-        widget.callBack?.onAdLoaded!(args['providerType']);
+        widget.callback?.onAdLoaded!(args['providerType']);
         break;
       case "onAdClicked":
-        widget.callBack?.onAdClicked!(args['providerType']);
+        widget.callback?.onAdClicked!(args['providerType']);
         break;
       case "onAdShowed":
-        widget.callBack?.onAdShowed!(args['providerType']);
+        widget.callback?.onAdShowed!(args['providerType']);
         break;
       case "onAdDismissed":
-        widget.callBack?.onAdDismissed!(args['providerType']);
+        widget.callback?.onAdDismissed!(args['providerType']);
         break;
     }
   }

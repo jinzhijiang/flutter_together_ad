@@ -19,6 +19,12 @@ typedef OnAdShowed = void Function(String providerType);
 /// 广告关闭
 typedef OnAdDismissed = void Function(String providerType);
 
+/// 视频广告已缓存
+typedef OnAdVideoCached = void Function(String providerType);
+
+/// 视频广告已经播放完了
+typedef OnAdVideoComplete = void Function(String providerType);
+
 class BaseAdCallback {
   OnAdStartRequest? onAdStartRequest;
   OnAdFailedAll? onAdFailedAll;
@@ -41,6 +47,33 @@ class TogetherSplashCallBack extends BaseAdCallback {
     this.onAdShowed,
     this.onAdClicked,
     this.onAdLoaded,
+    OnAdStartRequest? onAdStartRequest,
+    OnAdFailedAll? onAdFailedAll,
+    OnAdFailed? onAdFailed}) :
+        super(
+          onAdStartRequest: onAdStartRequest,
+          onAdFailed: onAdFailed,
+          onAdFailedAll: onAdFailedAll);
+}
+
+///
+/// 全屏视频广告回调
+///
+class TogetherFullscreenCallback extends BaseAdCallback {
+  OnAdLoaded? onAdLoaded;
+  OnAdClicked? onAdClicked;
+  OnAdShowed? onAdShowed;
+  OnAdVideoCached? onAdVideoCached;
+  OnAdVideoComplete? onAdVideoComplete;
+  OnAdDismissed? onAdDismissed;
+
+  TogetherFullscreenCallback({
+    this.onAdDismissed,
+    this.onAdShowed,
+    this.onAdClicked,
+    this.onAdLoaded,
+    this.onAdVideoComplete,
+    this.onAdVideoCached,
     OnAdStartRequest? onAdStartRequest,
     OnAdFailedAll? onAdFailedAll,
     OnAdFailed? onAdFailed}) :
