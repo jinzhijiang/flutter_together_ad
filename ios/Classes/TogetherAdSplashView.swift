@@ -10,6 +10,7 @@ import UIKit
 import TogetherAd
 
 class TogetherAdSplashViewFactory: NSObject, FlutterPlatformViewFactory {
+    public static let viewType = "com.xujiaji.togetherad/splashview"
     private var messenger: FlutterBinaryMessenger
 
     init(messenger: FlutterBinaryMessenger) {
@@ -32,29 +33,68 @@ class TogetherAdSplashViewFactory: NSObject, FlutterPlatformViewFactory {
 
 class TogetherAdSplashView: NSObject, FlutterPlatformView {
     private var _view: UIView
+    private var methodCall: FlutterMethodChannel
 
     init(
         frame: CGRect,
         viewIdentifier viewId: Int64,
         arguments args: Any?,
-        binaryMessenger messenger: FlutterBinaryMessenger?
+        binaryMessenger messenger: FlutterBinaryMessenger
     ) {
         _view = UIView()
+        methodCall = FlutterMethodChannel(
+            name: "\(TogetherAdSplashViewFactory.viewType)_\(viewId)",
+            binaryMessenger: messenger
+        )
         super.init()
         // iOS views can be created here
-        createNativeView(view: _view)
+        createNativeView(view: _view, args: args as? Dictionary<String, Any>)
     }
 
     func view() -> UIView {
         return _view
     }
 
-    func createNativeView(view _view: UIView){
-        _view.backgroundColor = UIColor.blue
+    func createNativeView(view _view: UIView, args: Dictionary<String, Any>?){
         let frame = UIScreen.main.bounds
         if let rootViewController = UIApplication.shared.delegate?.window??.rootViewController {
-            let view = TogetherSplashView(alias: "splash", rootViewController: rootViewController, frame: frame)
+            let view = TogetherSplashView(
+                alias: args?["alias"] as? String ?? "splash",
+                delegate: self,
+                rootViewController: rootViewController,
+                frame: frame)
             _view.addSubview(view)
         }
+    }
+}
+
+extension TogetherAdSplashView : SplashListener {
+    
+    public func onAdStartRequest(providerType: String) {
+        methodCall.invokeMethod("onAdStartRequest", arguments: ["providerType": providerType])
+    }
+
+    public func onAdFailedAll(failedMsg: String?) {
+        methodCall.invokeMethod("onAdFailedAll", arguments: ["failedMsg": failedMsg])
+    }
+
+    public func onAdFailed(providerType: String, failedMsg: String?) {
+        methodCall.invokeMethod("onAdFailed", arguments: ["providerType": providerType, "failedMsg": failedMsg])
+    }
+    
+    public func onAdLoaded(providerType: String) {
+        methodCall.invokeMethod("onAdLoaded", arguments: ["providerType": providerType])
+    }
+    
+    public func onAdClicked(providerType: String) {
+        methodCall.invokeMethod("onAdClicked", arguments: ["providerType": providerType])
+    }
+    
+    public func onAdExposure(providerType: String) {
+        methodCall.invokeMethod("onAdShowed", arguments: ["providerType": providerType])
+    }
+    
+    public func onAdDismissed(providerType: String) {
+        methodCall.invokeMethod("onAdDismissed", arguments: ["providerType": providerType])
     }
 }
