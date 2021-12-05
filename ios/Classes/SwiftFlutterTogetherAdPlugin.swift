@@ -17,6 +17,9 @@ public class SwiftFlutterTogetherAdPlugin: NSObject, FlutterPlugin {
         // 注册全屏视频
         TogetherAdFullscreen.register(with: registrar)
         
+        // 注册激励视频
+        TogetherAdReward.register(with: registrar)
+        
         let factory = TogetherAdSplashViewFactory(messenger: registrar.messenger())
         registrar.register(factory, withId: TogetherAdSplashViewFactory.viewType)
         let frame = UIScreen.main.bounds

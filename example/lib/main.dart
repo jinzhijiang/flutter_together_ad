@@ -21,10 +21,46 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // String _platformVersion = 'Unknown';
   TogetherAdFullscreen? fullscreen;
+  TogetherAdReward? reward;
 
   @override
   void initState() {
     super.initState();
+    reward = TogetherAdReward (
+        alias: 'reward',
+        callback: TogetherRewardCallback(
+            onAdFailedAll: (type) {
+              print("onAdFailedAll 全部加载失败 $type");
+            },
+            onAdFailed: (type, failedMsg) {
+              print("onAdFailed 加载失败 $type, $failedMsg");
+            },
+            onAdClicked: (type) {
+              print('onAdClicked 被点击 $type');
+            },
+            onAdLoaded: (type) {
+              print("onAdClicked 已加载 $type");
+            },
+            onAdDismissed: (type) {
+              print("onAdDismissed 已关闭 $type");
+            },
+            onAdVideoCached: (type) {
+              print("onAdVideoCached 视频已缓存 $type");
+            },
+            onAdVideoComplete: (type) {
+              print("onAdVideoComplete 已显示 $type");
+            },
+            onAdShowed: (type) {
+              print("onAdShowed 已显示 $type");
+            },
+            onAdStartRequest: (type) {
+              print("onAdStartRequest 开始请求 $type");
+            },
+          onAdRewardVerify: (type) {
+
+          }
+        ));
+
     fullscreen = TogetherAdFullscreen(
         alias: 'fullscreen',
         callback: TogetherFullscreenCallback(
@@ -44,7 +80,7 @@ class _MyAppState extends State<MyApp> {
               print("onAdDismissed 已关闭 $type");
             },
             onAdVideoCached: (type) {
-              print("onAdVideoCached 已显示 $type");
+              print("onAdVideoCached 视频已缓存 $type");
             },
             onAdVideoComplete: (type) {
               print("onAdVideoComplete 已显示 $type");
@@ -98,6 +134,12 @@ class _MyAppState extends State<MyApp> {
                   fullscreen?.loadAndShow();
                 },
               ),
+              TextButton(
+                child: const Text("加载并显示激励视频"),
+                onPressed: () {
+                  reward?.loadAndShow();
+                },
+              )
             ],
           ),
         ),

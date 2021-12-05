@@ -25,6 +25,9 @@ typedef OnAdVideoCached = void Function(String providerType);
 /// 视频广告已经播放完了
 typedef OnAdVideoComplete = void Function(String providerType);
 
+/// 视频广告验证
+typedef OnAdRewardVerify = void Function(String providerType);
+
 class BaseAdCallback {
   OnAdStartRequest? onAdStartRequest;
   OnAdFailedAll? onAdFailedAll;
@@ -74,6 +77,35 @@ class TogetherFullscreenCallback extends BaseAdCallback {
     this.onAdLoaded,
     this.onAdVideoComplete,
     this.onAdVideoCached,
+    OnAdStartRequest? onAdStartRequest,
+    OnAdFailedAll? onAdFailedAll,
+    OnAdFailed? onAdFailed}) :
+        super(
+          onAdStartRequest: onAdStartRequest,
+          onAdFailed: onAdFailed,
+          onAdFailedAll: onAdFailedAll);
+}
+
+///
+/// 激励视频广告回调
+///
+class TogetherRewardCallback extends BaseAdCallback {
+  OnAdLoaded? onAdLoaded;
+  OnAdClicked? onAdClicked;
+  OnAdShowed? onAdShowed;
+  OnAdVideoCached? onAdVideoCached;
+  OnAdVideoComplete? onAdVideoComplete;
+  OnAdDismissed? onAdDismissed;
+  OnAdRewardVerify? onAdRewardVerify;
+
+  TogetherRewardCallback({
+    this.onAdDismissed,
+    this.onAdShowed,
+    this.onAdClicked,
+    this.onAdLoaded,
+    this.onAdVideoComplete,
+    this.onAdVideoCached,
+    this.onAdRewardVerify,
     OnAdStartRequest? onAdStartRequest,
     OnAdFailedAll? onAdFailedAll,
     OnAdFailed? onAdFailed}) :

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 export 'together_ad_splash_view.dart';
 export 'together_ad_method_callback.dart';
 export 'together_ad_fullscreen.dart';
+export 'together_ad_reward.dart';
 
 class FlutterTogetherAd {
   static const MethodChannel _channel = MethodChannel('com.xujiaji.togetherad/main');
